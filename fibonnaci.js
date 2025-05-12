@@ -1,3 +1,8 @@
+/**
+ * Creates a fibonnaci sequence iteratively.
+ * @param {Number} iteration - Number of iterations to create a fibonnaci sequence. 
+ * @returns An array containing the sequence
+ */
 function fibs(iteration) {
     let prev = 0;
     let curr = 1;
@@ -7,7 +12,8 @@ function fibs(iteration) {
 
     for (let index = 0; index < iteration; index++) {
         arr.push(prev);
-        next = curr + prev
+        
+        next = curr + prev;
         prev = curr;
         curr = next;
     };
@@ -15,14 +21,14 @@ function fibs(iteration) {
     return arr;
 };
 
+/**
+ * Creates a fibonnaci sequence recursively.
+ * @param {Number} iteration - Number of iterations to create a fibonnaci sequence. 
+ * @returns An array containing the sequence
+ */
 function fibsRec(iteration) {
-    if (iteration <= 0) {
-        return [];
-    };
-
-    if (iteration === 1) {
-        return [0];
-    }
+    if (iteration <= 0) return [];
+    if (iteration === 1) return [0];
 
     const arr = fibsRec(iteration - 1);
 
