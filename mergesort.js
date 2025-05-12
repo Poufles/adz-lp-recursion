@@ -5,46 +5,44 @@
  */
 function MergeSort(arr) {
     const lengthArr = arr.length;
-    
+
     // Checks if the given array has elements to sort
     if (lengthArr === 0) {
         console.error('No elements to be sorted.');
         return arr;
     };
 
+    // Checks if the element length is only one.
+    // (For comparison)
+    if (lengthArr === 1) return arr.slice();
+
     const sortedArr = [];
+    
+    const division = lengthArr / 2; // Takes the length in two.
+    const leftDivision = arr.slice(0, division); // Takes the left half of the array.
+    const rightDivision = arr.slice(division); // Takes the right half of the array.
 
-    if (lengthArr > 1) {
-        const division = lengthArr / 2; // Takes the length in two.
-        const leftDivision = arr.slice(0, division); // Takes the left half of the array.
-        const rightDivision = arr.slice(division); // Takes the right half of the array.
+    // Verify through recursion if the array
+    // has only 1 element.
+    const leftArr = MergeSort(leftDivision);
+    const rightArr = MergeSort(rightDivision);
 
-        // Verify through recursion if the array
-        // has only 1 element.
-        const leftArr = MergeSort(leftDivision);
-        const rightArr = MergeSort(rightDivision);
-
-        // Reiterate through the left array.
-        while (leftArr.length > 0) {
-            // Sorts the array
-            if (leftArr[0] > rightArr[0]) {
-                sortedArr.push(rightArr.shift());
-            } else {
-                sortedArr.push(leftArr.shift());
-            };
-        }
-        
-        // Validate if any elements stays
-        // on the right part of the division.
-        while (rightArr.length > 0) {
+    // Reiterate through the left array.
+    while (leftArr.length > 0) {
+        // Sorts the array
+        if (leftArr[0] > rightArr[0]) {
             sortedArr.push(rightArr.shift());
+        } else {
+            sortedArr.push(leftArr.shift());
         };
+    }
 
-        return sortedArr; 
+    // Validate if any elements stays
+    // on the right part of the division.
+    while (rightArr.length > 0) {
+        sortedArr.push(rightArr.shift());
     };
 
-    // Put the single element in an array
-    sortedArr.push(arr[0]);
     return sortedArr;
 };
 
